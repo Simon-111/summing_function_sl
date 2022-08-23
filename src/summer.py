@@ -31,29 +31,31 @@ def summer(list_nums, sum_looking_for=10):
     if type(list_nums) != list:  # step 1a - is the first argument a list
         raise TypeError('Expected a list for the first argument')
     else:
-        for item in list_nums:  # step 1b - are all the objects in the list ints
-            if type(item) != int:
+        for num in list_nums:  # step 1b - are all the objects in the list ints
+            if type(num) != int:
                 raise TypeError('All elements of the list must be integers')
     try:  # step 1c - is the second input an int
         sum_looking_for == int(sum_looking_for)
     except ValueError:
         print('Sum being looked for must be an integer')
 
-    slices_of_sums = []  # step 1d - empty list to hold tuples of indices of slices that add up to sum_looking_for
+    start_stop_of_slices = []  # step 1d - empty list to hold tuples of indices of slices that add up to sum_looking_for
+    list_nums_summed = []
 
     for index in range(0, len(list_nums)):  # step 2
         running_total = 0  # set running total to 0
         end_slice = index  # initialize the ending index to the current index
-        while end_slice != len(list_nums):
-            running_total += list_nums[end_slice]
+        while end_slice != len(list_nums):  # loop will run until end slice equals one more than the last index
+            running_total += list_nums[end_slice]  # step 5
             end_slice += 1  # add one ot the ending index to track the ending index
             if running_total == sum_looking_for:  # step 3
-                slices_of_sums.append((index, end_slice))
-                break  # break out of while loop and return to for loop
+                start_stop_of_slices.append((index, end_slice))
+                #list_nums[index: end_slice]
+                break
             elif running_total > sum_looking_for:  # step 4 - no matching sum for starting index
                 break
 
-    if not slices_of_sums:  # step 6
-        slices_of_sums = None
+    if not start_stop_of_slices:  # step 6
+        start_stop_of_slices = None
 
-    return slices_of_sums
+    return start_stop_of_slices

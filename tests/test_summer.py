@@ -5,8 +5,8 @@
 
 import sys
 import pytest
-from summer import summer
-
+#from summer import summer
+from ..src.summer import summer
 
 def test_list_type_error():
     with pytest.raises(TypeError):
@@ -20,7 +20,11 @@ def test_secound_arg_not_int():
 
 def test_first_arg_not_list():
     with pytest.raises(TypeError):
-        summer(20.0, 5)
+        summer(20.4, 5)
+
+
+def test_second_arg_float():
+    assert summer([1, 2, 3], 2.0)
 
 
 def test_12_only():

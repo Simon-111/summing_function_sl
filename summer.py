@@ -22,20 +22,24 @@
 # step 7 - return the list with 'None' or the tuples withe the start and stop indexes for the sums
 
 
-def summer(list_nums, summation=10):
-    # print(type(list_nums))  # for debugging
-    if type(list_nums) != list:  # step 1a
+def summer(list_nums, sum_looking_for=10):
+    """This function takes a list of integers and a integer as inputs
+    The function looks through the list for consecutive items that add up to the second input
+
+    It returns a list of tuples with the start and stop indices for the slices that make up the sum
+    """
+    if type(list_nums) != list:  # step 1a - is the first argument a list
         raise TypeError('Expected a list for the first argument')
     else:
-        for item in list_nums:  # step 1b
+        for item in list_nums:  # step 1b - are all the objects in the list ints
             if type(item) != int:
                 raise TypeError('All elements of the list must be integers')
-    try:  # step 1c
-        summation == int(summation)
+    try:  # step 1c - is the second input an int
+        sum_looking_for == int(sum_looking_for)
     except ValueError:
         print('Sum being looked for must be an integer')
 
-    slices_of_sums = []  # step 1d - empty list to hold tuples of indices of slices with sum
+    slices_of_sums = []  # step 1d - empty list to hold tuples of indices of slices that add up to sum_looking_for
 
     for index in range(0, len(list_nums)):  # step 2
         running_total = 0  # set running total to 0
@@ -43,10 +47,10 @@ def summer(list_nums, summation=10):
         while end_slice != len(list_nums):
             running_total += list_nums[end_slice]
             end_slice += 1  # add one ot the ending index to track the ending index
-            if running_total == summation:  # step 3
+            if running_total == sum_looking_for:  # step 3
                 slices_of_sums.append((index, end_slice))
                 break  # break out of while loop and return to for loop
-            elif running_total > summation:  # step 4 - no matching sum for starting index
+            elif running_total > sum_looking_for:  # step 4 - no matching sum for starting index
                 break
 
     if not slices_of_sums:  # step 6

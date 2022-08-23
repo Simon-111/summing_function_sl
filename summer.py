@@ -29,7 +29,7 @@ def summer(list_nums, summation=10):
     else:
         for item in list_nums:  # step 1b
             if type(item) != int:
-                raise TypeError('All elements of the list should be integers')
+                raise TypeError('All elements of the list must be integers')
     try:  # step 1c
         summation == int(summation)
     except ValueError:
@@ -40,9 +40,7 @@ def summer(list_nums, summation=10):
     for index in range(0, len(list_nums)):  # step 2
         running_total = 0  # set running total to 0
         end_slice = index  # initialize the ending index to the current index
-        while True:
-            if end_slice == len(list_nums):  # check if we've reached the end of the list
-                break
+        while end_slice != len(list_nums):
             running_total += list_nums[end_slice]
             end_slice += 1  # add one ot the ending index to track the ending index
             if running_total == summation:  # step 3
